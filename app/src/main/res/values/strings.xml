@@ -325,7 +325,7 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="kill_switch_blocked">Kill-switch triggered: traffic is blocked</string>
     <string name="kill_switch_network_change_enable">Block traffic on Wi-Fi/Cellular switch</string>
     <string name="kill_switch_network_change_description">Instantly blocks all traffic when switching between Wi-Fi and mobile internet.</string>
-    <string name="kill_switch_infinite_warning">Warning: With infinite reconnect attempts, the main Kill-switch will not trigger on standard disconnects. Only the Wi-Fi/Cellular switch block will remain active to prevent infinite internet blocking.</string>
+    <string name="kill_switch_infinite_warning">Warning: With an infinite number of reconnect attempts, the main Kill-switch will not trigger on connection drops. Only the instant block on Wi-Fi ↔ Cellular switch will remain active (if enabled).</string>
     <string name="reconnect_attempts_description">Kill-switch activates when these attempts are exhausted.</string>
     <string name="auto_fallback_title">Auto-fallback to available servers:</string>
     <string name="auto_fallback_enable">Switch server on connection loss</string>
@@ -459,4 +459,5 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="token_error_unknown">An unknown error occurred.</string>
     <string name="token_error_title">Error</string>
     <string name="token_error_not_found">Token not found. Adding new tokens is available in the Token Management section.</string>
+    <string name="disconnect_reason_network_change_blocked">Network changed (Wi-Fi/Cellular)</string>
 </resources>

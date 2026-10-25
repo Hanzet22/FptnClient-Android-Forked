@@ -235,7 +235,7 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="kill_switch_blocked">Сработал kill-switch: трафик заблокирован</string>
     <string name="kill_switch_network_change_enable">Блокировать при смене Wi-Fi/Моб. интернета</string>
     <string name="kill_switch_network_change_description">Мгновенно блокирует весь трафик при переключении между Wi-Fi и мобильным интернетом.</string>
-    <string name="kill_switch_infinite_warning">Внимание: При бесконечном числе попыток переподключения главный Kill-switch не будет срабатывать при обычных отключениях. Активна только блокировка при смене Wi-Fi/Моб. интернета, чтобы не блокировать интернет навсегда.</string>
+    <string name="kill_switch_infinite_warning">Внимание: При бесконечном числе попыток переподключения главный Kill-switch не сработает при разрывах связи. Срабатывать будет только мгновенная блокировка при смене Wi-Fi ↔ Моб. интернет (если включена).</string>
     <string name="reconnect_attempts_description">Kill-switch срабатывает, когда эти попытки исчерпаны.</string>
     <string name="auto_fallback_title">Авто-переключение на доступные серверы:</string>
     <string name="auto_fallback_enable">Менять сервер при потере связи</string>
@@ -369,4 +369,5 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="token_error_unknown">Произошла неизвестная ошибка.</string>
     <string name="token_error_title">Ошибка</string>
     <string name="token_error_not_found">Токен не найден. Добавление новых токенов доступно в разделе Управление токенами.</string>
+    <string name="disconnect_reason_network_change_blocked">Сменён тип сети (Wi-Fi/Моб. интернет)</string>
 </resources>

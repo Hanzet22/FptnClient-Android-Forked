@@ -540,13 +540,6 @@ fun ExperimentalSettingsScreen(
                     onCheckedChange = {
                         killSwitchOnNetworkChange = it
                         SharedPrefUtils.saveKillSwitchOnNetworkChangeEnabled(context, it)
-
-                        // If Network Kill Switch is enabled, force-enable
-                        // "Reconnect on network change"; otherwise, protection will not take effect immediately.
-                        if (it && !reconnectOnChangeNetworkType) {
-                            reconnectOnChangeNetworkType = true
-                            SharedPrefUtils.saveReconnectOnChangeNetworkTypeEnabled(context, true)
-                        }
                     },
                 )
                 Text(
