@@ -61,7 +61,7 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="disconnect_reason_system_revoked">已断开: VPN 被系统撤销</string>
     <string name="disconnect_reason_closed_unexpectedly">已断开: 连接意外关闭</string>
     <string name="disconnect_reason_unexpected_error">已断开: 意外错误</string>
-    <string name="disconnect_reason_network_change_blocked">网络已切换 (Wi-Fi/移动网络)</string>
+    <string name="disconnect_reason_network_change_blocked">网络已切换 (Wi-Fi 切换至移动网络,或反之)</string>
     <string name="error">连接时发生错误!</string>
     <string name="paste_your_token">点击粘贴令牌</string>
     <string name="running">FptnVPN 正在运行</string>
@@ -123,7 +123,7 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="no_active_internet_connections">未连接到互联网。</string>
     <string name="reconnecting_failed">重新连接失败。</string>
 
-    <string name="access_token_error">认证错误!请确保您在应用设置中使用的是最新获取的访问令牌。</string>
+    <string name="access_token_error">认证错误!请确保在设置中使用的是最新的访问令牌。</string>
 
     <string name="ssl_context_init_failed">SSL 上下文初始化失败!</string>
 
@@ -142,7 +142,7 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="refresh_token">刷新令牌...</string>
     <string name="close_button_text">关闭</string>
     <string name="share_via_message">通过消息分享</string>
-    <string name="sni_text_description">服务器名称指示 (SNI) —— 连接到 VPN 服务器时声明的网站地址。请指定一个在您所在国家无需 VPN 即可访问的流行网站。</string>
+    <string name="sni_text_description">SNI —— 连接 VPN 服务器时发送的网站地址。请指定一个在您所在国家无需 VPN 即可访问的常用网站。</string>
     <string name="your_current_sni">当前 SNI:</string>
     <string name="default_sni">samsung.com</string>
     <string name="sni_text_view_hint">新 SNI</string>
@@ -151,7 +151,7 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="warning">警告</string>
 
     <string name="battery_optimization_request_dialog_title">禁用电池优化</string>
-    <string name="battery_optimization_request_dialog_text">为获得稳定的连接,请授予此应用禁用电池优化的权限</string>
+    <string name="battery_optimization_request_dialog_text">为获得稳定连接,请授予禁用电池优化的权限。</string>
     <string name="background_setup_title">可靠的后台运行</string>
     <string name="background_setup_text">为稳定运行,请设置以下选项:</string>
     <string name="background_setup_notifications_title">启用通知</string>
@@ -170,7 +170,7 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
 
 
     <string name="background_data_request_dialog_title">后台数据传输</string>
-    <string name="background_data_request_dialog_text">为获得稳定的连接,请授予此应用禁用后台数据传输限制的权限</string>
+    <string name="background_data_request_dialog_text">为获得稳定连接,请授予禁用后台数据限制的权限。</string>
     <string name="permission_warning_text">请在设置屏幕上授予所有权限以获得稳定的连接</string>
 
 
@@ -193,7 +193,7 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
 
     <string name="another_settings">其他设置:</string>
     <string name="quick_settings_tile_title">通知栏快捷开关</string>
-    <string name="quick_settings_tile_description">在 Android 快捷设置面板 (下拉通知栏) 中添加 VPN 连接/断开按钮,无需打开应用即可控制 VPN。</string>
+    <string name="quick_settings_tile_description">在 Android 快捷设置面板中添加 VPN 开关,无需打开应用即可控制 VPN。</string>
     <string name="quick_settings_tile_button">添加到快捷设置</string>
     <string name="tile_already_added">磁贴已添加</string>
     <string name="tile_added_successfully">磁贴添加成功</string>
@@ -212,29 +212,29 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="reset_to_default_success">高级设置已恢复为默认值</string>
 
     <string name="ad_block_title">广告拦截:</string>
-    <string name="ad_block_description">在 DNS 层级为所有应用拦截广告和追踪器。可能需要在系统设置中关闭私有 DNS (DoH) —— 否则 DNS 查询会绕过过滤。</string>
+    <string name="ad_block_description">在 DNS 层级为所有应用拦截广告和追踪器。请在系统设置中关闭私有 DNS (DoH),否则过滤会被绕过。</string>
     <string name="ad_block_enable">拦截广告和追踪器</string>
 
     <string name="split_tunnel_title">分流 (Split Tunneling):</string>
     <string name="split_tunnel_enable">为列表中的域名启用分流</string>
     <string name="split_tunnel_list_link">域名列表</string>
     <string name="split_tunnel_advanced_enable">使用 TLD 和 IDN (高级)</string>
-    <string name="split_tunnel_advanced_description">允许绕过整个域名区域 (例如 .ru) 和任何语言的域名。仅在必要时启用。</string>
+    <string name="split_tunnel_advanced_description">绕过整个域名区域 (TLD,例如 .ru 或 ru —— 带点或不带) 和任何语言的域名 (IDN)。仅在必要时启用。</string>
 
     <string name="domain_blacklist_title">域名黑名单:</string>
-    <string name="domain_blacklist_description">拦截连接到所列域名及其子域名。每行一个域名。可能需要在系统设置中关闭私有 DNS (DoH) —— 否则 DNS 查询会绕过过滤。启用高级模式后,还可以拦截整个域名区域。</string>
+    <string name="domain_blacklist_description">拦截所列域名及其子域名。请在系统设置中关闭私有 DNS (DoH),否则过滤会被绕过。</string>
     <string name="domain_blacklist_list_link">域名列表</string>
     <string name="domain_blacklist_enable">拦截列表中的域名</string>
     <string name="domain_blacklist_hint">example.com</string>
-    <string name="domain_blacklist_advanced_enable">拦截整个 TLD 和 IDN (高级)</string>
-    <string name="domain_blacklist_advanced_description">允许拦截整个域名区域 (例如 .cn 或 .ir) 和任何语言的域名。仅在您了解自己在做什么时启用。否则可能意外拦截所需网站,导致应用无法正常工作。</string>
+    <string name="domain_blacklist_advanced_enable">拦截 TLD 和 IDN (高级)</string>
+    <string name="domain_blacklist_advanced_description">拦截整个域名区域 (TLD,例如 .cn 或 cn —— 带点或不带) 和任何语言的域名 (IDN)。请谨慎使用 —— 错误设置可能导致应用无法工作。</string>
 
     <string name="speed_notification_title">通知:</string>
     <string name="speed_notification_enable">状态栏显示连接速度</string>
     <string name="traffic_notification_enable">状态栏显示连接流量</string>
 
     <string name="connect_failed_help_settings_title">连接失败提示:</string>
-    <string name="connect_failed_help_settings_description">如果从零开始的连接连续失败两次,将弹出对话框建议更改绕过封锁方法或获取新令牌。</string>
+    <string name="connect_failed_help_settings_description">若连接连续失败两次,将弹出对话框,建议更改绕过方法或获取新令牌。</string>
     <string name="connect_failed_help_enable">连接失败后显示提示</string>
 
     <string name="home_screen_settings_title">主屏幕:</string>
@@ -245,12 +245,12 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="kill_switch_title">Kill-switch (流量阻断开关):</string>
     <string name="kill_switch_description">在无 VPN 时拦截流量。当重新连接尝试用尽或连接意外断开时触发。</string>
     <string name="kill_switch_enable">无 VPN 时拦截流量</string>
-    <string name="kill_switch_system_hint">仅在应用进程存活时有效: 如果 Android 终止进程,TUN 接口会关闭,流量将直接传输。Always-on VPN 由 Android 本身执行 —— 请在设置中与"无 VPN 时拦截流量"一起启用。</string>
+    <string name="kill_switch_system_hint">仅在应用运行时有效。如需完整保护,请在 Android 设置中同时启用 Always-on VPN。</string>
     <string name="kill_switch_system_button">打开 Android VPN 设置</string>
     <string name="kill_switch_blocked">Kill-switch 已触发: 流量已拦截</string>
-    <string name="kill_switch_network_change_enable">在 Wi-Fi/移动网络切换时拦截流量</string>
+    <string name="kill_switch_network_change_enable">在 Wi-Fi 切换到移动网络 (或反之) 时拦截流量</string>
     <string name="kill_switch_network_change_description">在 Wi-Fi 与移动网络之间切换时立即拦截所有流量。</string>
-    <string name="kill_switch_infinite_warning">警告: 当重新连接尝试次数为无限时,主 Kill-switch 在连接断开时不会触发。只有 Wi-Fi ↔ 移动网络切换时的即时拦截会保持有效 (如果已启用)。</string>
+    <string name="kill_switch_infinite_warning">警告: 当重连尝试为无限次时,连接断开时 Kill-switch 不会触发 —— 仅在 Wi-Fi 与移动网络之间切换时生效 (若已启用)。</string>
     <string name="reconnect_attempts_description">Kill-switch 在这些尝试用尽时触发。</string>
     <string name="auto_fallback_title">自动切换到可用服务器:</string>
     <string name="auto_fallback_enable">连接丢失时切换服务器</string>
@@ -286,9 +286,9 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="sni_reality_radio_button_label_additional_info">需要一个真实存在的域名 (否则可能发生错误)</string>
     <string name="connecting_auto">正在选择最佳服务器...</string>
 
-    <string name="settings_per_app_russian_notice"><![CDATA[为了安全和稳定的服务运行,已知的间谍应用始终绕过 VPN 且无法返回隧道。完整的<a href="https://github.com/fptn-project/FptnClient-Android/blob/develop/app/src/main/res/values/always_excluded_apps.xml">排除应用列表</a>和<a href="https://github.com/fptn-project/FptnClient-Android/blob/develop/app/src/main/res/values/split_tunnel_domains.xml">其域名列表</a>可在 GitHub 上查看。]]></string>
+    <string name="settings_per_app_russian_notice"><![CDATA[为安全起见,已知的间谍应用始终绕过 VPN。完整排除应用列表及域名列表可在 GitHub 上查看。]]></string>
     <string name="per_app_vpn_mode_title">分应用 VPN 模式</string>
-    <string name="per_app_vpn_mode_info">您可以在此配置分应用 VPN 模式: 为应用启用 VPN (默认) 或允许/禁止特定应用使用 VPN。</string>
+    <string name="per_app_vpn_mode_info">仅允许的应用,或除所选外的全部。</string>
     <string name="per_app_vpn_settings_title">隧道设置</string>
     <string name="all_app_mode_radio_button_label">已禁用</string>
     <string name="all_app_mode_radio_button_label_additional_info">所有应用都使用 VPN</string>
@@ -297,7 +297,7 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="disallowed_apps_radio_button_label">所有应用使用 VPN,所选应用除外</string>
     <string name="disallowed_apps_radio_button_label_additional_info">所有应用使用 VPN,所选应用除外</string>
     <string name="per_app_vpn_no_apps_selected_title">未选择任何应用</string>
-    <string name="per_app_vpn_no_apps_selected_message">未选择任何应用进行隧道传输。VPN 将激活,但没有应用流量会通过隧道。\n\n请至少选择一个应用或选择其他模式。</string>
+    <string name="per_app_vpn_no_apps_selected_message">未选择用于隧道的应用。VPN 将激活,但无流量通过。\n\n请选择一个应用或更换模式。</string>
     <string name="save_anyway">仍然保存</string>
 
     <string name="auto_sni_label">自动选择 SNI</string>
@@ -348,13 +348,13 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="vpn_switch_button">切换</string>
 
     <string name="vpn_setup_error_title">VPN 设置错误</string>
-    <string name="vpn_setup_error_message">要连接到 FPTN VPN,您需要:\n\n- 允许应用连接到 VPN 网络\n- 在系统 VPN 设置中为所有其他 VPN 应用禁用"始终开启 VPN"功能</string>
+    <string name="vpn_setup_error_message">连接需:\n\n- 授予 VPN 权限\n- 在系统设置中为其他 VPN 应用禁用 Always-on VPN</string>
     <string name="open_vpn_settings">打开 VPN 设置</string>
 
     <string name="backups_title">设置备份</string>
     <string name="backups_info">将所有 FPTN 设置保存到文件或从备份恢复</string>
     <string name="backup_save_title">保存设置</string>
-    <string name="backup_save_description">将所有设置 (绕过方法、SNI、隧道、分应用 VPN、附加设置) 导出为 JSON 文件。您可以保存在此设备上或分享。</string>
+    <string name="backup_save_description">将所有设置导出为文件。可保存在本设备或分享。</string>
     <string name="backup_save_button">保存</string>
     <string name="backup_share_button">分享</string>
     <string name="backup_restore_title">恢复设置</string>
