@@ -2,6 +2,37 @@
 <resources>
     <string-array name="split_tunnel_domains" translatable="false">
         <!-- ===== RU ===== -->
+        <item>artstation.com</item>
+        <item>artstationmedia.com</item>
+        <item>api-eu.carrotquest.app</item>
+        <item>api-eu.carrotquest.io</item>
+        <item>api-ru.carrotquest.app</item>
+        <item>api-ru.carrotquest.io</item>
+        <item>api-secure.carrotquest.app</item>
+        <item>api-secure.carrottrack.app</item>
+        <item>api.carrotquest.app</item>
+        <item>api.carrotquest.io</item>
+        <item>api.carrottrack.app</item>
+        <item>api.dashly.app</item>
+        <item>api.dashlytrack.app</item>
+        <item>mobile.stat.2gis.com</item>
+        <item>counter.yadro.ru</item>
+        <item>stat.2gis.ru</item>
+        <item>stat.2gis.com</item>
+        <item>analytics.2gis.ru</item>
+        <item>mytracker.ru</item>
+        <item>aiesa.ru</item>
+        <item>alice.yandex.net</item>
+        <item>alice.yandex.ru</item>
+        <item>alicepro.yandex.ru</item>
+        <item>copymonkey.app</item>
+        <item>gerwin.io</item>
+        <item>giga.chat</item>
+        <item>gptunnel.ru</item>
+        <item>polza.ai</item>
+        <item>robotext.io</item>
+        <item>rugpt.io</item>
+        <item>tokenator.top</item>
         <item>0123456789nonexistent.com</item>
         <item>0d.kebhana.mx</item>
         <item>1337.abcvg.info</item>
@@ -60,7 +91,12 @@
         <item>actualidad-rt.com</item>
         <item>ad-cdek.ru</item>
         <item>ad.mail.ru</item>
+        <item>alt-ad.mail.ru</item>
+        <item>appmetrica.yandex.net</item>
+        <item>extstat.yandex.net</item>
         <item>adfox.ru</item>
+        <item>ad.adfox.ru</item>
+        <item>awaps.yandex.net</item>
         <item>adm.category5.tv</item>
         <item>admetrica.ru</item>
         <item>admin.videoenpoche.info</item>
@@ -246,6 +282,7 @@
         <item>bt2.54new.com</item>
         <item>bt2.edwardk.info</item>
         <item>bubu.mapfactor.com</item>
+        <item>bs.yandex.ru</item>
         <item>buny.uk</item>
         <item>buryatia.ru</item>
         <item>bvarf.tracker.sh</item>
@@ -300,6 +337,7 @@
         <item>clck.ru</item>
         <item>cloud.ru</item>
         <item>cloudru.cn</item>
+        <item>clck.yandex.ru</item>
         <item>clstorage.net</item>
         <item>clubx5.ru</item>
         <item>cm.expert</item>
@@ -440,6 +478,8 @@
         <item>ekburg.ru</item>
         <item>elama.ru</item>
         <item>electronicsignature.ru</item>
+        <item>e.lanbook.com</item>
+        <item>elibrary.ru</item>
         <item>eligens.cl</item>
         <item>eligens.com.br</item>
         <item>eligens.io</item>
@@ -683,6 +723,7 @@
         <item>ixbt.site</item>
         <item>ixbt.video</item>
         <item>iz.ru</item>
+        <item>intuit.ru</item>
         <item>izbirkom.ru</item>
         <item>izhevsk.ru</item>
         <item>jamal.ru</item>
@@ -806,6 +847,169 @@
         <item>lead-pro2023.online</item>
         <item>learnbits.me</item>
         <item>lemanapro.ru</item>
+        <item>abakan.lemanapro.ru</item>
+        <item>adfs.lemanapro.ru</item>
+        <item>anadyr.lemanapro.ru</item>
+        <item>api-test.lemanapro.ru</item>
+        <item>api.lemanapro.ru</item>
+        <item>appius.lemanapro.ru</item>
+        <item>arkhangelsk.lemanapro.ru</item>
+        <item>astrahan.lemanapro.ru</item>
+        <item>attachments.owa.lemanapro.ru</item>
+        <item>auth.lemanapro.ru</item>
+        <item>autodiscover.lemanapro.ru</item>
+        <item>b2b.lemanapro.ru</item>
+        <item>barnaul.lemanapro.ru</item>
+        <item>belgorod.lemanapro.ru</item>
+        <item>birobidzhan.lemanapro.ru</item>
+        <item>blagoveshchensk.lemanapro.ru</item>
+        <item>bryansk.lemanapro.ru</item>
+        <item>cdcalendar.lemanapro.ru</item>
+        <item>cdn.lemanapro.ru</item>
+        <item>cheboksary.lemanapro.ru</item>
+        <item>chelyabinsk.lemanapro.ru</item>
+        <item>cherepovets.lemanapro.ru</item>
+        <item>cherkessk.lemanapro.ru</item>
+        <item>chita.lemanapro.ru</item>
+        <item>commcon-external-bff.lemanapro.ru</item>
+        <item>connect-chat.lemanapro.ru</item>
+        <item>connect.lemanapro.ru</item>
+        <item>contracts.lemanapro.ru</item>
+        <item>cp.lemanapro.ru</item>
+        <item>developers.lemanapro.ru</item>
+        <item>dmp.dmpkit.lemanapro.ru</item>
+        <item>ekaterinburg.lemanapro.ru</item>
+        <item>elista.lemanapro.ru</item>
+        <item>events.lemanapro.ru</item>
+        <item>expway-e.lemanapro.ru</item>
+        <item>families.lemanapro.ru</item>
+        <item>ftp.lemanapro.ru</item>
+        <item>getslot.lemanapro.ru</item>
+        <item>gorno-altaysk.lemanapro.ru</item>
+        <item>groznyy.lemanapro.ru</item>
+        <item>habarovsk.lemanapro.ru</item>
+        <item>hanty-mansiysk.lemanapro.ru</item>
+        <item>hotline.lemanapro.ru</item>
+        <item>import.lemanapro.ru</item>
+        <item>irkutsk.lemanapro.ru</item>
+        <item>istra.lemanapro.ru</item>
+        <item>ivanovo.lemanapro.ru</item>
+        <item>izhevsk.lemanapro.ru</item>
+        <item>kaliningrad.lemanapro.ru</item>
+        <item>kaluga.lemanapro.ru</item>
+        <item>kazan.lemanapro.ru</item>
+        <item>kemerovo.lemanapro.ru</item>
+        <item>kirov.lemanapro.ru</item>
+        <item>klin.lemanapro.ru</item>
+        <item>kostroma.lemanapro.ru</item>
+        <item>krasnodar.lemanapro.ru</item>
+        <item>krasnoyarsk.lemanapro.ru</item>
+        <item>krym.lemanapro.ru</item>
+        <item>ktalk.lemanapro.ru</item>
+        <item>kurgan.lemanapro.ru</item>
+        <item>kursk.lemanapro.ru</item>
+        <item>kyzyl.lemanapro.ru</item>
+        <item>learn-test.lemanapro.ru</item>
+        <item>learn.lemanapro.ru</item>
+        <item>learn.partners.lemanapro.ru</item>
+        <item>lipetsk.lemanapro.ru</item>
+        <item>magadan.lemanapro.ru</item>
+        <item>magas.lemanapro.ru</item>
+        <item>magnitogorsk.lemanapro.ru</item>
+        <item>mahachkala.lemanapro.ru</item>
+        <item>mail-01.lemanapro.ru</item>
+        <item>mail-02.lemanapro.ru</item>
+        <item>mail-03.lemanapro.ru</item>
+        <item>mail-04.lemanapro.ru</item>
+        <item>mail-05.lemanapro.ru</item>
+        <item>mail-06.lemanapro.ru</item>
+        <item>marketing.lemanapro.ru</item>
+        <item>maykop.lemanapro.ru</item>
+        <item>media.rabota.lemanapro.ru</item>
+        <item>merchant.lemanapro.ru</item>
+        <item>moscow.lemanapro.ru</item>
+        <item>murmansk.lemanapro.ru</item>
+        <item>naberezhnye-chelny.lemanapro.ru</item>
+        <item>nalchik.lemanapro.ru</item>
+        <item>naro-fominsk.lemanapro.ru</item>
+        <item>naryan-mar.lemanapro.ru</item>
+        <item>nazran.lemanapro.ru</item>
+        <item>nizhnekamsk.lemanapro.ru</item>
+        <item>nizhniy-novgorod.lemanapro.ru</item>
+        <item>nizhniy-tagil.lemanapro.ru</item>
+        <item>noginsk.lemanapro.ru</item>
+        <item>novokuznetsk.lemanapro.ru</item>
+        <item>novorossiysk.lemanapro.ru</item>
+        <item>novosibirsk.lemanapro.ru</item>
+        <item>omsk.lemanapro.ru</item>
+        <item>order.lemanapro.ru</item>
+        <item>orel.lemanapro.ru</item>
+        <item>orenburg.lemanapro.ru</item>
+        <item>owa.lemanapro.ru</item>
+        <item>partner.lemanapro.ru</item>
+        <item>partners.lemanapro.ru</item>
+        <item>pay.lemanapro.ru</item>
+        <item>penza.lemanapro.ru</item>
+        <item>perm.lemanapro.ru</item>
+        <item>petropavlovsk-kamchatskiy.lemanapro.ru</item>
+        <item>petrozavodsk.lemanapro.ru</item>
+        <item>ppm-lm.lemanapro.ru</item>
+        <item>ppm.lemanapro.ru</item>
+        <item>pskov.lemanapro.ru</item>
+        <item>pyatigorsk.lemanapro.ru</item>
+        <item>qcms.lemanapro.ru</item>
+        <item>rabota-api.lemanapro.ru</item>
+        <item>rabota-cms.lemanapro.ru</item>
+        <item>rabota.lemanapro.ru</item>
+        <item>rom.lemanapro.ru</item>
+        <item>rostov.lemanapro.ru</item>
+        <item>ryazan.lemanapro.ru</item>
+        <item>salekhard.lemanapro.ru</item>
+        <item>samara.lemanapro.ru</item>
+        <item>saransk.lemanapro.ru</item>
+        <item>saratov.lemanapro.ru</item>
+        <item>simferopol.lemanapro.ru</item>
+        <item>smolensk.lemanapro.ru</item>
+        <item>sochi.lemanapro.ru</item>
+        <item>spb.lemanapro.ru</item>
+        <item>sslvpn.lemanapro.ru</item>
+        <item>sslvpna.lemanapro.ru</item>
+        <item>sslvpnb.lemanapro.ru</item>
+        <item>sslvpnt.lemanapro.ru</item>
+        <item>static.dmpkit.lemanapro.ru</item>
+        <item>static.lemanapro.ru</item>
+        <item>stavropol.lemanapro.ru</item>
+        <item>sterlitamak.lemanapro.ru</item>
+        <item>surgut.lemanapro.ru</item>
+        <item>survey.lemanapro.ru</item>
+        <item>syktyvkar.lemanapro.ru</item>
+        <item>tambov.lemanapro.ru</item>
+        <item>tenders.lemanapro.ru</item>
+        <item>tolyatti.lemanapro.ru</item>
+        <item>tomsk.lemanapro.ru</item>
+        <item>tula.lemanapro.ru</item>
+        <item>tver.lemanapro.ru</item>
+        <item>tyumen.lemanapro.ru</item>
+        <item>ufa.lemanapro.ru</item>
+        <item>ulan-ude.lemanapro.ru</item>
+        <item>ulyanovsk.lemanapro.ru</item>
+        <item>us.lemanapro.ru</item>
+        <item>uslugi.lemanapro.ru</item>
+        <item>velikiy-novgorod.lemanapro.ru</item>
+        <item>vladikavkaz.lemanapro.ru</item>
+        <item>vladimir.lemanapro.ru</item>
+        <item>vladivostok.lemanapro.ru</item>
+        <item>volgograd.lemanapro.ru</item>
+        <item>vologda.lemanapro.ru</item>
+        <item>volzhskiy.lemanapro.ru</item>
+        <item>voronezh.lemanapro.ru</item>
+        <item>vpn.lemanapro.ru</item>
+        <item>wfm.lemanapro.ru</item>
+        <item>yakutsk.lemanapro.ru</item>
+        <item>yaroslavl.lemanapro.ru</item>
+        <item>yoshkar-ola.lemanapro.ru</item>
+        <item>yuzhno-sahalinsk.lemanapro.ru</item>
+        <item>zhukovskiy.lemanapro.ru</item>
         <item>lenta.com</item>
         <item>lenta.ru</item>
         <item>lenta.tech</item>
@@ -839,6 +1043,7 @@
         <item>max-tcs.ru</item>
         <item>max.ru</item>
         <item>mc.yandex.ru</item>
+        <item>metrika.yandex.net</item>
         <item>mcs.st</item>
         <item>mediaclub.tv</item>
         <item>mediator.mail.ru</item>
@@ -1436,6 +1641,8 @@
         <item>svoy.academy</item>
         <item>sweb.ru</item>
         <item>swentr.site</item>
+        <item>security.lanbook.com</item>
+        <item>surveys.yandex.ru</item>
         <item>t-access.ru</item>
         <item>t-bank-app.ru</item>
         <item>t-bank-app.su</item>
@@ -2152,5 +2359,6 @@
         <item>zub.ru</item>
         <item>zvuk-b2b.com</item>
         <item>zvuk.com</item>
+        <item>znanium.ru</item>
     </string-array>
 </resources>
