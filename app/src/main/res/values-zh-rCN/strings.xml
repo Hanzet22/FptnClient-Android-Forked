@@ -219,7 +219,7 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="split_tunnel_enable">为列表中的域名启用分流</string>
     <string name="split_tunnel_list_link">域名列表</string>
     <string name="split_tunnel_advanced_enable">使用 TLD 和 IDN (高级)</string>
-    <string name="split_tunnel_advanced_description">绕过整个域名区域 (TLD,例如 .ru 或 ru —— 带点或不带) 和任何语言的域名 (IDN)。仅在必要时启用。</string>
+    <string name="split_tunnel_advanced_description">绕过整个域名区域 (TLD,例如 .ru 或 ru —— 带点或不带) 和任何语言的域名 (IDN)。\n\n在俄罗斯、伊朗、中国及其他有审查的国家建议启用 —— 否则本地域名不会绕过隧道,且政府可能封锁 VPN 连接。TLD 和 IDN 需添加到域名列表中。</string>
 
     <string name="domain_blacklist_title">域名黑名单:</string>
     <string name="domain_blacklist_description">拦截所列域名及其子域名。请在系统设置中关闭私有 DNS (DoH),否则过滤会被绕过。</string>

@@ -2,11 +2,6 @@
 <resources>
     <string-array name="split_tunnel_domains" translatable="false">
         <!-- ===== RU ===== -->
-        <item>ru</item>
-        <item>su</item>
-        <item>рф</item>
-        <item>ру</item>
-        <item>xn--p1ai</item>
         <item>0123456789nonexistent.com</item>
         <item>0d.kebhana.mx</item>
         <item>1337.abcvg.info</item>

@@ -158,7 +158,6 @@ fun ExperimentalSettingsScreen(
         SharedPrefUtils.saveDomainBlacklistDomains(context, Constants.DOMAIN_BLACKLIST_DEFAULT)
         SharedPrefUtils.saveDomainBlacklistAdvancedModeEnabled(context, false)
         SharedPrefUtils.saveSplitTunnelDomainsEnabled(context, true)
-        SharedPrefUtils.saveSplitTunnelDomainsAdvancedModeEnabled(context, true)
         SharedPrefUtils.saveReconnectOnChangeNetworkTypeEnabled(context, true)
         SharedPrefUtils.saveReconnectOnChangeIPEnabled(context, true)
         SharedPrefUtils.saveReconnectAttemptsCount(context, ATTEMPTS_COUNT_VALUES[2])

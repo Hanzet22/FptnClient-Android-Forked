@@ -473,9 +473,7 @@ public class SharedPrefUtils {
 
     public static boolean getSplitTunnelDomainsAdvancedModeEnabled(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.APPLICATION_SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        // Default is true so that IDN (Cyrillic/CJK/Arabic) domains and TLDs (.ru, .cn) work out
-        // of the box for new installations. Existing users keep their previously saved choice.
-        return sharedPreferences.getBoolean(Constants.SPLIT_TUNNEL_DOMAINS_ADVANCED_MODE_PREF_KEY, true);
+        return sharedPreferences.getBoolean(Constants.SPLIT_TUNNEL_DOMAINS_ADVANCED_MODE_PREF_KEY, false);
     }
 
     public static void saveSplitTunnelDomainsAdvancedModeEnabled(Context context, boolean enabled) {
