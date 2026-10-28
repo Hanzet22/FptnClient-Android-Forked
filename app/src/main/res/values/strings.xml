@@ -25,7 +25,7 @@
         <![CDATA[
         The list of available servers is encrypted in the token.
         <br/>
-        To update the server list, enter a new token.
+        Enter a token with the <b>same username</b> as your current one to replace its server list. Tokens with a <b>new</b> username must be added via <b>Token Management</b>.
         <br/>
         The token works like a password: once updated, it will no longer be valid on any devices where it was previously used.
         <br/><br/>
@@ -458,6 +458,6 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="token_error_invalid">Invalid token format.</string>
     <string name="token_error_unknown">An unknown error occurred.</string>
     <string name="token_error_title">Error</string>
-    <string name="token_error_not_found">Token not found. Adding new tokens is available in the Token Management section.</string>
+    <string name="token_error_not_found">No saved token matches the username in this token. To add a new one, use Token Management.</string>
     <string name="disconnect_reason_network_change_blocked">Network changed (Wi-Fi to Cellular and vice versa)</string>
 </resources>

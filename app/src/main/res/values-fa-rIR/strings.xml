@@ -23,7 +23,7 @@
         <![CDATA[
         فهرست سرورهای در دسترس در توکن رمزگذاری شده است.
         <br/>
-        برای به‌روزرسانی فهرست سرورها، یک توکن جدید وارد کنید.
+        برای جایگزینی فهرست سرورها، توکنی با <b>همان نام کاربری</b> فعلی خود وارد کنید. توکن‌هایی با <b>نام کاربری جدید</b> باید از طریق بخش <b>مدیریت توکن‌ها</b> افزوده شوند.
         <br/>
         توکن مانند گذرواژه عمل می‌کند: با به‌روزرسانی آن، در تمام دستگاه‌هایی که قبلاً استفاده شده بود غیرفعال می‌شود.
         <br/><br/>
@@ -370,6 +370,6 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="token_error_invalid">فرمت توکن نامعتبر است.</string>
     <string name="token_error_unknown">یک خطای ناشناخته رخ داد.</string>
     <string name="token_error_title">خطا</string>
-    <string name="token_error_not_found">توکن یافت نشد. افزودن توکن‌های جدید در بخش مدیریت توکن‌ها در دسترس است.</string>
+    <string name="token_error_not_found">هیچ توکن ذخیره‌شده‌ای با نام کاربری این توکن مطابقت ندارد. برای افزودن مورد جدید، از مدیریت توکن‌ها استفاده کنید.</string>
     <string name="disconnect_reason_network_change_blocked">تغییر شبکه (از Wi-Fi به اینترنت موبایل و برعکس)</string>
 </resources>

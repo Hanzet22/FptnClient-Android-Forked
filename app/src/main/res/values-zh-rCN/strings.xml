@@ -24,7 +24,7 @@
         <![CDATA[
         可用服务器列表已加密保存在令牌中。
         <br/>
-        如需更新服务器列表,请输入新的令牌。
+        请输入与当前令牌 <b>用户名相同</b> 的令牌以替换其服务器列表。带有 <b>新用户名</b> 的令牌须通过 <b>令牌管理</b> 添加。
         <br/>
         令牌类似于密码:更新后,之前使用过该令牌的设备将无法继续使用。
         <br/><br/>
@@ -383,5 +383,5 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="token_error_invalid">令牌格式无效。</string>
     <string name="token_error_unknown">发生未知错误。</string>
     <string name="token_error_title">错误</string>
-    <string name="token_error_not_found">未找到令牌。可以在"令牌管理"部分添加新令牌。</string>
+    <string name="token_error_not_found">没有已保存的令牌与该令牌的用户名匹配。如需添加新令牌,请使用"令牌管理"。</string>
 </resources>
