@@ -16,6 +16,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import org.fptn.vpn.core.common.Constants
 import org.fptn.vpn.database.AppDatabase
@@ -110,10 +111,16 @@ class MainActivity : ComponentActivity() {
         // Strict 2s timeout: if Room is somehow stuck, fall back to "session invalid" rather than
         // hanging onCreate/onNewIntent and triggering ANR. Splash will then route the user
         // correctly once it can read the DB itself.
-        val (servers, tokens) = withTimeoutOrNull(2_000L) {
-            runBlocking(Dispatchers.IO) {
-                val db = AppDatabase.getInstance(this@MainActivity)
-                Pair(db.serverDAO().getCountSync(), db.tokenDAO().getCount())
+        //
+        // runBlocking creates the coroutine that withTimeoutOrNull needs to suspend from;
+        // withContext switches to Dispatchers.IO for the synchronous Room queries (AppDatabase
+        // forbids main-thread queries).
+        val (servers, tokens) = runBlocking {
+            withTimeoutOrNull(2_000L) {
+                withContext(Dispatchers.IO) {
+                    val db = AppDatabase.getInstance(this@MainActivity)
+                    Pair(db.serverDAO().getCountSync(), db.tokenDAO().getCount())
+                }
             }
         } ?: Pair(0, 0)
         return if (servers > 0 && tokens > 0) route else null
