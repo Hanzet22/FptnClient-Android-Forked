@@ -94,6 +94,14 @@ fun SettingsScreen(
     var batteryOptimizationGranted by remember { mutableStateOf(PermissionsUtils.checkBatteryOptimizations(context)) }
     var backgroundDataGranted by remember { mutableStateOf(PermissionsUtils.checkBackgroundDataTransferRestrictions(context)) }
 
+    // Capture the screen-level LocalDensity ONCE, before any AlertDialog is composed. AlertDialog
+    // renders in a separate window (androidx.compose.ui.window.Dialog) that does NOT inherit
+    // CompositionLocals from its parent, so reading LocalDensity.current INSIDE the dialog's
+    // title/text/button lambdas returns the system Density (without our custom fontScale from
+    // MainActivity). Providing dialogDensity explicitly fixes both "font size doesn't change
+    // when the user picks a custom font scale" and "line height looks wrong".
+    val dialogDensity = LocalDensity.current
+
     val appVersion = remember {
         try {
             context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: ""
@@ -305,7 +313,7 @@ fun SettingsScreen(
         AlertDialog(
             onDismissRequest = { showLogoutConfirm = false },
             title = {
-                CompositionLocalProvider(LocalDensity provides LocalDensity.current) {
+                CompositionLocalProvider(LocalDensity provides dialogDensity) {
                     Text(
                         stringResource(R.string.dialog_logout_title),
                         color = White,
@@ -314,7 +322,7 @@ fun SettingsScreen(
                 }
             },
             text = {
-                CompositionLocalProvider(LocalDensity provides LocalDensity.current) {
+                CompositionLocalProvider(LocalDensity provides dialogDensity) {
                     Text(
                         stringResource(R.string.dialog_logout_message),
                         color = White,
@@ -324,7 +332,7 @@ fun SettingsScreen(
                 }
             },
             confirmButton = {
-                CompositionLocalProvider(LocalDensity provides LocalDensity.current) {
+                CompositionLocalProvider(LocalDensity provides dialogDensity) {
                     TextButton(onClick = {
                         showLogoutConfirm = false
                         viewModel.deleteAllServers()
@@ -335,7 +343,7 @@ fun SettingsScreen(
                 }
             },
             dismissButton = {
-                CompositionLocalProvider(LocalDensity provides LocalDensity.current) {
+                CompositionLocalProvider(LocalDensity provides dialogDensity) {
                     TextButton(onClick = { showLogoutConfirm = false }) {
                         Text(stringResource(R.string.no))
                     }
@@ -343,8 +351,6 @@ fun SettingsScreen(
             },
         )
     }
-
-    val dialogDensity = LocalDensity.current
 
     if (showBatteryOptimizationDialog) {
         AlertDialog(
