@@ -99,6 +99,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -475,6 +477,34 @@ public class FptnService extends VpnService {
             }
             sessionEstablished = false;
             coldConnectAttempt = true;
+
+            // Security gate (early): refuse to even start the foreground notification when there
+            // are no servers AND no tokens in the DB. The downstream startConnectionAttempt has
+            // the same gate, but running it here too avoids flashing a "Connecting..."
+            // foreground notification for a few frames before disconnect() removes it.
+            // SERVER_LIST_NULL_OR_EMPTY is in the "offer refresh token" set, so the user will be
+            // routed to the Update Token flow rather than seeing a generic error.
+            //
+            // onStartCommand runs on the main thread, but AppDatabase does not allow main-thread
+            // queries — bounce off a worker with a strict timeout.
+            boolean earlySessionEstablished = false;
+            FutureTask<Boolean> earlyCheck = new FutureTask<>(() ->
+                    appDatabase.serverDAO().getCountSync() > 0 && appDatabase.tokenDAO().getCount() > 0);
+            executorService.execute(earlyCheck);
+            try {
+                earlySessionEstablished = earlyCheck.get(2, TimeUnit.SECONDS);
+            } catch (Exception e) {
+                XLog.tag(TAG).w("Early session check failed (%s) — falling through; startConnectionAttempt gate will re-check",
+                        e.getClass().getSimpleName());
+                earlySessionEstablished = true; // assume true; startConnectionAttempt gate will catch it
+                earlyCheck.cancel(true);
+            }
+            if (!earlySessionEstablished) {
+                XLog.tag(TAG).w("Refusing to start foreground notification — session not established");
+                disconnect(new PVNClientException(ErrorCode.SERVER_LIST_NULL_OR_EMPTY));
+                return START_NOT_STICKY;
+            }
+
             startForegroundWithNotification(getString(R.string.connecting));
 
             if (!NetworkUtils.isOnline(connectivityManager)) {
@@ -730,6 +760,24 @@ public class FptnService extends VpnService {
     private void startConnectionAttempt(int initialServerId) {
         submittedConnectionAttempt = executorService.submit(() -> {
             try {
+                // Security gate: refuse to enter CONNECTING when there are no servers in the DB.
+                // This can happen when the user starts the VPN (e.g. from the Quick Settings tile)
+                // before signing in, or right after a logout that cleared the server table. Without
+                // this guard we would post the "Selecting the best server..." foreground notification,
+                // flip the static ConnectionState to CONNECTING, and let AppNavHost auto-route into
+                // Home — exposing the UI to an unauthenticated user.
+                int serverCount = appDatabase.serverDAO().getCountSync();
+                int tokenCount = appDatabase.tokenDAO().getCount();
+                if (serverCount == 0 || tokenCount == 0) {
+                    XLog.tag(TAG).w("Refusing to start connection — session not established (servers=%d, tokens=%d)",
+                            serverCount, tokenCount);
+                    // SERVER_LIST_NULL_OR_EMPTY is in the "offer refresh token" set, so the
+                    // user will be routed to the Update Token / Telegram bot flow rather than
+                    // seeing a generic error.
+                    disconnect(new PVNClientException(ErrorCode.SERVER_LIST_NULL_OR_EMPTY));
+                    return;
+                }
+
                 setConnectionState(ConnectionState.CONNECTING, null);
 
                 NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

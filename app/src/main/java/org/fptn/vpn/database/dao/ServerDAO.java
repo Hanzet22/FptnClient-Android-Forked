@@ -40,6 +40,9 @@ public interface ServerDAO {
     List<ServerEntity> getServerList();
 
     @Query("SELECT COUNT(*) FROM server_table")
+    int getCountSync();
+
+    @Query("SELECT COUNT(*) FROM server_table")
     ListenableFuture<Integer> getCount();
 
     @Query("SELECT * FROM server_table WHERE censured = :censured")
