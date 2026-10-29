@@ -61,7 +61,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import lombok.Getter;
-
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
 public class SniCheckerService extends Service {
     private static final String TAG = SniCheckerService.class.getSimpleName();
 
@@ -206,6 +207,32 @@ public class SniCheckerService extends Service {
             String intentAction = intent.getAction();
 
             if (ACTION_START.equalsIgnoreCase(intentAction)) {
+                // Security gate (early): refuse to start if there are no servers AND no tokens in
+                // the DB. This can happen when ACTION_START arrives right after a logout cleared
+                // the tables — serverDAO().getById(serverId) would return null, the worker would
+                // "abort SNI check" silently, and stopCheckingProcess() (with the now-ACTIVE state)
+                // would post a misleading "SNI not found" notification. Bounce off a worker with a
+                // 2s timeout — onStartCommand runs on the main thread, and AppDatabase forbids
+                // main-thread queries.
+                boolean earlySessionEstablished = false;
+                FutureTask<Boolean> earlyCheck = new FutureTask<>(() ->
+                        appDatabase.serverDAO().getCountSync() > 0 && appDatabase.tokenDAO().getCount() > 0);
+                executorService.execute(earlyCheck);
+                try {
+                    earlySessionEstablished = earlyCheck.get(2, TimeUnit.SECONDS);
+                } catch (Exception e) {
+                    XLog.tag(TAG).w("Early session check failed (%s) — aborting SNI start",
+                            e.getClass().getSimpleName());
+                    earlyCheck.cancel(true);
+                    stopSelf();
+                    return START_NOT_STICKY;
+                }
+                if (!earlySessionEstablished) {
+                    XLog.tag(TAG).w("Refusing to start SNI check — session not established");
+                    stopSelf();
+                    return START_NOT_STICKY;
+                }
+
                 startForegroundWithNotification("Searching the best SNI");
                 XLog.tag(TAG).i("SNI check started");
 
@@ -214,7 +241,14 @@ public class SniCheckerService extends Service {
                 boolean resetChecked = intent.getBooleanExtra(RESET_CHECKED_EXTRA, false);
                 int serverId = intent.getIntExtra(SELECTED_SERVER, Constants.SELECTED_SERVER_ID_AUTO);
 
-                serviceState.postValue(SniCheckerServiceState.ACTIVE);
+                // setValue (not postValue) — onStartCommand runs on the main thread, and the
+                // worker launched below checks serviceState.getValue() == ACTIVE in its while loop.
+                // postValue would deliver ACTIVE asynchronously via the main looper; on a very fast
+                // device the worker could enter the loop before the postValue was dispatched, see
+                // INACTIVE, skip the loop entirely, fall through to stopCheckingProcess() and post
+                // a misleading "SNI not found" notification. setValue updates the underlying
+                // volatile field synchronously so the worker observes ACTIVE immediately.
+                serviceState.setValue(SniCheckerServiceState.ACTIVE);
 
                 executorService.submit(() -> {
                     ServerEntity serverEntity = appDatabase.serverDAO().getById(serverId);
