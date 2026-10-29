@@ -370,4 +370,12 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="token_error_title">Ошибка</string>
     <string name="token_error_not_found">Среди сохранённых токенов нет ни одного с таким username. Чтобы добавить новый, используйте раздел Управление токенами.</string>
     <string name="disconnect_reason_network_change_blocked">Сменён тип сети (с Wi-Fi на мобильный интернет и наоборот)</string>
+
+    <!-- Auto-start on boot -->
+    <string name="auto_start_on_boot_title">Автозапуск при загрузке устройства</string>
+    <string name="auto_start_on_boot_description">VPN автоматически подключается при запуске устройства. Требуется разрешение VPN и исключение из оптимизации батареи.</string>
+    <string name="auto_start_on_boot_enable">Подключать VPN при загрузке устройства</string>
+    <string name="auto_start_on_boot_hint_before">На некоторых устройствах (</string>
+    <string name="auto_start_on_boot_hint_oems">Xiaomi, Huawei, Samsung и др.</string>
+    <string name="auto_start_on_boot_hint_after">) необходимо вручную разрешить автозапуск в настройках устройства.</string>
 </resources>

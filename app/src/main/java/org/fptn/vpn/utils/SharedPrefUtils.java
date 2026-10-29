@@ -353,6 +353,18 @@ public class SharedPrefUtils {
         XLog.tag(TAG).d("Saved " + Constants.FONT_SCALE_PREF_KEY + " = " + index);
     }
 
+    /* Auto-start on boot */
+    public static boolean getAutoStartOnBoot(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.APPLICATION_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(Constants.AUTO_START_ON_BOOT_PREF_KEY, false);
+    }
+
+    public static void saveAutoStartOnBoot(Context context, boolean enabled) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.APPLICATION_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        sharedPreferences.edit().putBoolean(Constants.AUTO_START_ON_BOOT_PREF_KEY, enabled).apply();
+        XLog.tag(TAG).d("Saved " + Constants.AUTO_START_ON_BOOT_PREF_KEY + " = " + enabled);
+    }
+
     /* Token freshness reminder */
 
     public static long getTokenUpdatedDate(Context context) {

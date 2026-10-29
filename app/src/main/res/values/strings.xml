@@ -460,4 +460,12 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="token_error_title">Error</string>
     <string name="token_error_not_found">No saved token matches the username in this token. To add a new one, use Token Management.</string>
     <string name="disconnect_reason_network_change_blocked">Network changed (Wi-Fi to Cellular and vice versa)</string>
+
+    <!-- Auto-start on boot -->
+    <string name="auto_start_on_boot_title">Auto-start on device boot</string>
+    <string name="auto_start_on_boot_description">VPN automatically connects when the device starts. Requires VPN permission and battery optimization exemption.</string>
+    <string name="auto_start_on_boot_enable">Connect VPN on device boot</string>
+    <string name="auto_start_on_boot_hint_before">On some devices (</string>
+    <string name="auto_start_on_boot_hint_oems">Xiaomi, Huawei, Samsung and others</string>
+    <string name="auto_start_on_boot_hint_after">) you need to manually allow auto-start in device settings.</string>
 </resources>

@@ -89,6 +89,7 @@ object Constants {
     const val FONT_SCALE_PREF_KEY: String = "FONT_SCALE_V1"
     const val REMOTE_EXCLUDED_APPS_PREF_KEY: String = "REMOTE_EXCLUDED_APPS_V1"
     const val REMOTE_LISTS_LAST_SYNC_DATE_PREF_KEY: String = "REMOTE_LISTS_LAST_SYNC_DATE_V1"
+    const val AUTO_START_ON_BOOT_PREF_KEY: String = "AUTO_START_ON_BOOT_V1"
 
     // App-wide font scale override (active only when USE_SYSTEM_FONT_SIZE_PREF_KEY == false).
     // Index into FONT_SCALE_VALUES; default = 1 (= 1.0f, matches system).

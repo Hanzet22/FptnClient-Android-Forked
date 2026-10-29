@@ -92,6 +92,7 @@ public final class SettingsBackupManager {
         Boolean allowLandscape;
         Boolean useSystemFontSize;
         Integer fontScaleIndex;
+        Boolean autoStartOnBoot;
     }
 
     private static class BackupAppRule {
@@ -138,6 +139,7 @@ public final class SettingsBackupManager {
         settings.allowLandscape = SharedPrefUtils.getAllowLandscape(context);
         settings.useSystemFontSize = SharedPrefUtils.getUseSystemFontSize(context);
         settings.fontScaleIndex = SharedPrefUtils.getFontScaleIndex(context);
+        settings.autoStartOnBoot = SharedPrefUtils.getAutoStartOnBoot(context);
 
         backup.settings = settings;
 
@@ -264,6 +266,9 @@ public final class SettingsBackupManager {
         }
         if (settings.fontScaleIndex != null) {
             SharedPrefUtils.saveFontScaleIndex(context, settings.fontScaleIndex);
+        }
+        if (settings.autoStartOnBoot != null) {
+            SharedPrefUtils.saveAutoStartOnBoot(context, settings.autoStartOnBoot);
         }
 
         if (backup.perAppVpnApps != null) {

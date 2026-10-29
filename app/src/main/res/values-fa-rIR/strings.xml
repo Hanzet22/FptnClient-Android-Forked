@@ -372,4 +372,12 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="token_error_title">خطا</string>
     <string name="token_error_not_found">هیچ توکن ذخیره‌شده‌ای با نام کاربری این توکن مطابقت ندارد. برای افزودن مورد جدید، از مدیریت توکن‌ها استفاده کنید.</string>
     <string name="disconnect_reason_network_change_blocked">تغییر شبکه (از Wi-Fi به اینترنت موبایل و برعکس)</string>
+
+    <!-- Auto-start on boot -->
+    <string name="auto_start_on_boot_title">شروع خودکار هنگام روشن شدن دستگاه</string>
+    <string name="auto_start_on_boot_description">VPN به طور خودکار هنگام روشن شدن دستگاه متصل می‌شود. نیاز به اجازه VPN و معافیت از بهینه‌سازی باتری دارد.</string>
+    <string name="auto_start_on_boot_enable">اتصال VPN هنگام روشن شدن دستگاه</string>
+    <string name="auto_start_on_boot_hint_before">در برخی دستگاه‌ها (</string>
+    <string name="auto_start_on_boot_hint_oems">شیائومی، هواوی، سامسونگ و غیره</string>
+    <string name="auto_start_on_boot_hint_after">) باید شروع خودکار را به طور دستی در تنظیمات دستگاه اجازه دهید.</string>
 </resources>

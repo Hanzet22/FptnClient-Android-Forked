@@ -31,6 +31,10 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.withStyle
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -119,6 +123,7 @@ fun ExperimentalSettingsScreen(
 
     var useSystemFontSize by remember { mutableStateOf(FontScaleState.useSystem) }
     var fontScaleProgress by remember { mutableFloatStateOf(FontScaleState.index.toFloat()) }
+    var autoStartOnBoot by remember { mutableStateOf(SharedPrefUtils.getAutoStartOnBoot(context)) }
 
     fun resetToDefault() {
         killSwitchEnabled = false
@@ -167,6 +172,9 @@ fun ExperimentalSettingsScreen(
         SharedPrefUtils.saveConnectFailedHelpEnabled(context, true)
         SharedPrefUtils.saveAutoFallbackEnabled(context, true)
         SharedPrefUtils.saveAutoFallbackThreshold(context, FALLBACK_THRESHOLD_VALUES[3])
+
+        autoStartOnBoot = false
+        SharedPrefUtils.saveAutoStartOnBoot(context, false)
 
         XLog.tag(TAG).i("Experimental settings reset to default")
         Toast.makeText(context, R.string.reset_to_default_success, Toast.LENGTH_SHORT).show()
@@ -613,6 +621,33 @@ fun ExperimentalSettingsScreen(
                         },
                     )
                 }
+            }
+
+            ExperimentalCard(paddingBottom = 8.dp) {
+                CardTitle(stringResource(R.string.auto_start_on_boot_title))
+                CardDescription(stringResource(R.string.auto_start_on_boot_description))
+                SwitchRow(
+                    text = stringResource(R.string.auto_start_on_boot_enable),
+                    checked = autoStartOnBoot,
+                    onCheckedChange = {
+                        autoStartOnBoot = it
+                        SharedPrefUtils.saveAutoStartOnBoot(context, it)
+                    },
+                )
+                // Hint with bold OEM names — single line spacing (lineHeight = 17.sp)
+                Text(
+                    text = buildAnnotatedString {
+                        append(stringResource(R.string.auto_start_on_boot_hint_before))
+                        withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                            append(stringResource(R.string.auto_start_on_boot_hint_oems))
+                        }
+                        append(stringResource(R.string.auto_start_on_boot_hint_after))
+                    },
+                    color = White.copy(alpha = 0.7f),
+                    fontSize = 12.sp,
+                    lineHeight = 17.sp,
+                    modifier = Modifier.padding(top = 6.dp),
+                )
             }
 
             Text(

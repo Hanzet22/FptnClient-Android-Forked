@@ -384,4 +384,12 @@ https://play.google.com/store/apps/details?id=org.fptn.vpn
     <string name="token_error_unknown">发生未知错误。</string>
     <string name="token_error_title">错误</string>
     <string name="token_error_not_found">没有已保存的令牌与该令牌的用户名匹配。如需添加新令牌,请使用"令牌管理"。</string>
+
+    <!-- Auto-start on boot -->
+    <string name="auto_start_on_boot_title">设备开机时自动启动</string>
+    <string name="auto_start_on_boot_description">VPN在设备启动时自动连接。需要VPN权限和电池优化豁免。</string>
+    <string name="auto_start_on_boot_enable">设备开机时连接VPN</string>
+    <string name="auto_start_on_boot_hint_before">在某些设备上（</string>
+    <string name="auto_start_on_boot_hint_oems">小米、华为、三星等</string>
+    <string name="auto_start_on_boot_hint_after">）您需要在设备设置中手动允许自动启动。</string>
 </resources>
