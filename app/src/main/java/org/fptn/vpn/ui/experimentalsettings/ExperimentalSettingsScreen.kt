@@ -31,10 +31,16 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.foundation.focusable
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.input.key.type
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -94,6 +100,8 @@ fun ExperimentalSettingsScreen(
     onNavigateSettings: () -> Unit,
 ) {
     val context = LocalContext.current
+    val configuration = LocalConfiguration.current
+    val isTv = configuration.uiMode and android.content.res.Configuration.UI_MODE_TYPE_TELEVISION != 0
     var showShareDialog by remember { mutableStateOf(false) }
     var showDomainBlacklistDialog by remember { mutableStateOf(false) }
 
@@ -260,21 +268,23 @@ fun ExperimentalSettingsScreen(
                 modifier = Modifier.padding(top = 10.dp, bottom = 10.dp),
             )
 
-            ExperimentalCard {
-                CardTitle(stringResource(R.string.orientation_settings_title))
-                SwitchRow(
-                    text = stringResource(R.string.allow_landscape_label),
-                    checked = allowLandscape,
-                    onCheckedChange = {
-                        allowLandscape = it
-                        SharedPrefUtils.saveAllowLandscape(context, it)
-                        context.findActivity()?.requestedOrientation = if (it) {
-                            ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-                        } else {
-                            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-                        }
-                    },
-                )
+            if (!isTv) {
+                ExperimentalCard {
+                    CardTitle(stringResource(R.string.orientation_settings_title))
+                    SwitchRow(
+                        text = stringResource(R.string.allow_landscape_label),
+                        checked = allowLandscape,
+                        onCheckedChange = {
+                            allowLandscape = it
+                            SharedPrefUtils.saveAllowLandscape(context, it)
+                            context.findActivity()?.requestedOrientation = if (it) {
+                                ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+                            } else {
+                                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                            }
+                        },
+                    )
+                }
             }
 
             ExperimentalCard {
@@ -498,33 +508,35 @@ fun ExperimentalSettingsScreen(
                 )
             }
 
-            ExperimentalCard(paddingBottom = 8.dp) {
-                CardTitle(stringResource(R.string.font_scale_title))
-                CardDescription(stringResource(R.string.font_scale_description))
+            if (!isTv) {
+                ExperimentalCard(paddingBottom = 8.dp) {
+                    CardTitle(stringResource(R.string.font_scale_title))
+                    CardDescription(stringResource(R.string.font_scale_description))
 
-                SwitchRow(
-                    text = stringResource(R.string.font_scale_use_system),
-                    checked = useSystemFontSize,
-                    onCheckedChange = {
-                        useSystemFontSize = it
-                        // Updating global state → instant re-rendering of the entire UI
-                        FontScaleState.setUseSystem(context, it)
-                    },
-                )
+                    SwitchRow(
+                        text = stringResource(R.string.font_scale_use_system),
+                        checked = useSystemFontSize,
+                        onCheckedChange = {
+                            useSystemFontSize = it
+                            // Updating global state → instant re-rendering of the entire UI
+                            FontScaleState.setUseSystem(context, it)
+                        },
+                    )
 
-                DiscreteSeekBar(
-                    label = stringResource(R.string.font_scale_custom_label),
-                    valueText = FONT_SCALE_LABELS[fontScaleProgress.toInt()],
-                    progress = fontScaleProgress,
-                    enabled = !useSystemFontSize,
-                    onProgressChange = {
-                        fontScaleProgress = it
-                        // Updating global state → instant re-rendering of the entire UI
-                        FontScaleState.setIndex(context, it.toInt())
-                        XLog.tag(TAG).i("Font scale changed [index=%d, value=%.2f]",
-                            it.toInt(), Constants.FONT_SCALE_VALUES[it.toInt()])
-                    },
-                )
+                    DiscreteSeekBar(
+                        label = stringResource(R.string.font_scale_custom_label),
+                        valueText = FONT_SCALE_LABELS[fontScaleProgress.toInt()],
+                        progress = fontScaleProgress,
+                        enabled = !useSystemFontSize,
+                        onProgressChange = {
+                            fontScaleProgress = it
+                            // Updating global state → instant re-rendering of the entire UI
+                            FontScaleState.setIndex(context, it.toInt())
+                            XLog.tag(TAG).i("Font scale changed [index=%d, value=%.2f]",
+                                it.toInt(), Constants.FONT_SCALE_VALUES[it.toInt()])
+                        },
+                    )
+                }
             }
 
             ExperimentalCard(paddingBottom = 8.dp) {
@@ -577,7 +589,7 @@ fun ExperimentalSettingsScreen(
                 )
             }
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && !isTv) {
                 ExperimentalCard(paddingBottom = 8.dp) {
                     CardTitle(stringResource(R.string.quick_settings_tile_title))
                     Text(
@@ -785,6 +797,30 @@ private fun DiscreteSeekBar(
                 .fillMaxWidth()
                 .height(48.dp)
                 .alpha(if (enabled) 1f else 0.5f)
+                .focusable(enabled)
+                .onKeyEvent { event ->
+                    if (event.type == KeyEventType.KeyDown && currentEnabled) {
+                        when (event.key) {
+                            Key.DirectionLeft -> {
+                                val newValue = (currentProgress - 1).coerceIn(0f, maxStep.toFloat())
+                                if (newValue != currentProgress) {
+                                    currentOnProgressChange(newValue)
+                                }
+                                true
+                            }
+                            Key.DirectionRight -> {
+                                val newValue = (currentProgress + 1).coerceIn(0f, maxStep.toFloat())
+                                if (newValue != currentProgress) {
+                                    currentOnProgressChange(newValue)
+                                }
+                                true
+                            }
+                            else -> false
+                        }
+                    } else {
+                        false
+                    }
+                }
                 .pointerInput(Unit) {
                     // Early check: if the slider is disabled, don't process gestures at all.
                     if (!currentEnabled) return@pointerInput

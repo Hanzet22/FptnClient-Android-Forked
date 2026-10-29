@@ -7,7 +7,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
-import android.content.res.Configuration
 import android.graphics.drawable.Icon
 import android.net.Uri
 import android.net.VpnService
@@ -57,7 +56,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.onSizeChanged
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -88,6 +86,7 @@ import org.fptn.vpn.ui.theme.White
 import org.fptn.vpn.ui.theme.Yellow
 import org.fptn.vpn.utils.PermissionsUtils
 import org.fptn.vpn.utils.SharedPrefUtils
+import androidx.compose.ui.platform.LocalConfiguration
 import org.fptn.vpn.vpnclient.exception.ErrorCode
 import androidx.core.net.toUri
 import androidx.compose.foundation.background
@@ -130,6 +129,8 @@ fun HomeScreen(
     viewModel: HomeActivityViewModel = viewModel(),
 ) {
     val context = LocalContext.current
+    val configuration = LocalConfiguration.current
+    val isTv = configuration.uiMode and android.content.res.Configuration.UI_MODE_TYPE_TELEVISION != 0
     val lifecycleOwner = LocalLifecycleOwner.current
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -435,7 +436,7 @@ fun HomeScreen(
     // Request the quick-settings tile once, same as the legacy Activity's onCreate.
     LaunchedEffect(Unit) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
-            !SharedPrefUtils.isQuickSettingsTileRequested(context)
+            !SharedPrefUtils.isQuickSettingsTileRequested(context) && !isTv
         ) {
             try {
                 val statusBarManager = context.getSystemService(StatusBarManager::class.java)
@@ -469,7 +470,7 @@ fun HomeScreen(
                 .background(Primary)   // ← Один слой, тот же цвет, что у темы
                 .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal)),
         ) {
-            if (showPermissionWarning) {
+            if (showPermissionWarning && !isTv) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -509,7 +510,7 @@ fun HomeScreen(
                         val buttonSize = dimensionResource(R.dimen.toggle_button_size)
                         val density = LocalDensity.current
                         val isLandscape =
-                            LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
+                            configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
                         val verticalBias =
                             if (isLandscape) CONNECT_BUTTON_VERTICAL_BIAS_LANDSCAPE else CONNECT_BUTTON_VERTICAL_BIAS
 

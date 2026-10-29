@@ -59,6 +59,7 @@ import org.fptn.vpn.ui.theme.White
 import org.fptn.vpn.utils.PermissionsUtils
 import org.fptn.vpn.utils.SharedPrefUtils
 import org.fptn.vpn.utils.XLogInitializer
+import androidx.compose.ui.platform.LocalConfiguration
 
 private const val TAG = "SettingsScreen"
 
@@ -82,6 +83,8 @@ fun SettingsScreen(
     viewModel: SettingsViewModel = viewModel(),
 ) {
     val context = LocalContext.current
+    val configuration = LocalConfiguration.current
+    val isTv = configuration.uiMode and android.content.res.Configuration.UI_MODE_TYPE_TELEVISION != 0
     val lifecycleOwner = LocalLifecycleOwner.current
 
     var showShareDialog by remember { mutableStateOf(false) }
@@ -205,10 +208,11 @@ fun SettingsScreen(
                 onClick = onNavigateExperimentalSettings,
             )
 
-            SettingsCard {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Image(
-                        painter = painterResource(R.drawable.user_permissions_24),
+            if (!isTv) {
+                SettingsCard {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Image(
+                            painter = painterResource(R.drawable.user_permissions_24),
                         contentDescription = null,
                         modifier = Modifier.size(16.dp),
                     )
@@ -231,6 +235,7 @@ fun SettingsScreen(
                         granted = backgroundDataGranted,
                         onRequest = { showBackgroundDataDialog = true },
                     )
+                }
                 }
             }
 

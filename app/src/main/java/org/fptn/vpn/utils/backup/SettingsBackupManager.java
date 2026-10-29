@@ -36,6 +36,7 @@ import org.fptn.vpn.utils.SharedPrefUtils;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.fptn.vpn.enums.ConnectionStrategy;
+import android.content.pm.PackageManager;
 
 /**
  * Exports all user-configurable FPTN settings to JSON and applies them back.
@@ -269,6 +270,15 @@ public final class SettingsBackupManager {
         }
         if (settings.autoStartOnBoot != null) {
             SharedPrefUtils.saveAutoStartOnBoot(context, settings.autoStartOnBoot);
+        }
+
+        // TV overrides: force settings that make sense for TV, regardless of what
+        // the backup file contained. TV is always landscape, has no battery, and
+        // custom font sizes can break the 10-foot UI layout.
+        boolean isTv = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
+        if (isTv) {
+            SharedPrefUtils.saveAllowLandscape(context, true);
+            SharedPrefUtils.saveUseSystemFontSize(context, true);
         }
 
         if (backup.perAppVpnApps != null) {
