@@ -91,7 +91,14 @@ fun AppNavHost(
         }
     }
     LaunchedEffect(sniState == SniCheckerServiceState.ACTIVE) {
-        if (sniState == SniCheckerServiceState.ACTIVE) {
+        // Same gate as the VPN branch above: only navigate when we're NOT already on the
+        // destination. Without this check, tapping "Auto-select SNI" while already on
+        // BypassMethodsScreen triggers a navigate(BYPASS_METHODS) round-trip — even with
+        // launchSingleTop = true Compose Navigation recomposes the screen for a couple of
+        // frames, which the user sees as a visual flash.
+        if (sniState == SniCheckerServiceState.ACTIVE &&
+            navController.currentDestination?.route != AppRoute.BYPASS_METHODS
+        ) {
             val sessionValid = withContext(Dispatchers.IO) {
                 val db = AppDatabase.getInstance(context)
                 db.serverDAO().getCountSync() > 0 && db.tokenDAO().getCount() > 0
