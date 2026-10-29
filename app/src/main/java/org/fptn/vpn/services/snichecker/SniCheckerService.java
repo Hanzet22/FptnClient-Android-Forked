@@ -187,6 +187,13 @@ public class SniCheckerService extends Service {
     }
 
     public synchronized static void stopChecking(Context context) {
+        // No-op if the SNI checker isn't actually running — otherwise sending ACTION_STOP would
+        // start the service just to immediately call stopCheckingProcess(), which would show
+        // "SNI not found" notifications for a search that never happened (e.g. on logout).
+        if (getStaticState() != SniCheckerServiceState.ACTIVE) {
+            XLog.tag(TAG).i("stopChecking: service not active — nothing to do");
+            return;
+        }
         Intent intent = new Intent(context, SniCheckerService.class);
         intent.setAction(ACTION_STOP);
         context.startService(intent);
@@ -293,18 +300,24 @@ public class SniCheckerService extends Service {
         // Release wakelock
         releasePowerLock();
 
+        // Only post result notifications if a search was actually running. ACTION_STOP can reach
+        // the service even when the checker was never started (e.g. logout calls stopChecking()
+        // defensively) — in that case foundedSni is null simply because no search ever ran, not
+        // because the search ran out of candidates. Showing "SNI not found" then is misleading.
+        boolean wasActive = serviceState.getValue() == SniCheckerServiceState.ACTIVE;
+
         if (foundedSni != null) {
             //todo: does need add save action to notification?
             SharedPrefUtils.saveSniHostname(this, foundedSni);
 
             foundedSniLiveData.postValue(foundedSni);
 
-            showResultNotification(getString(R.string.sni_found_title), getString(R.string.sni_found_message) + foundedSni);
-        } else {
+            if (wasActive) {
+                showResultNotification(getString(R.string.sni_found_title), getString(R.string.sni_found_message) + foundedSni);
+            }
+        } else if (wasActive) {
+            // Single localized notification (the hardcoded English duplicate was removed).
             showResultNotification(getString(R.string.sni_not_found_title), getString(R.string.sni_not_found_message));
-
-            showResultNotification("SNI not found!", "Not found working SNI for server: "
-                    + Optional.ofNullable(selectedServer.getValue()).map(ServerEntity::getServerInfo).orElse(""));
         }
         serviceState.postValue(SniCheckerServiceState.INACTIVE);
 
