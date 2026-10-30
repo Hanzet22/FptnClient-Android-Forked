@@ -31,7 +31,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import org.fptn.vpn.R
-import org.fptn.vpn.ui.theme.White
 
 /**
  * The connected-state traffic card: current speed row, an optional live speed chart, and a
@@ -47,7 +46,7 @@ fun TrafficCard(
     speedSample: LongArray?,
     modifier: Modifier = Modifier,
 ) {
-    val dividerColor = Color(0x26FFFFFF)
+    val dividerColor = MaterialTheme.colorScheme.outlineVariant
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(24.dp),
@@ -71,7 +70,7 @@ fun TrafficCard(
                 )
                 Text(
                     text = downloadSpeed,
-                    color = White,
+                    color = MaterialTheme.colorScheme.onSurface,
                     textAlign = TextAlign.End,
                     modifier = Modifier.weight(1f).padding(end = 8.dp),
                 )
@@ -115,7 +114,7 @@ fun TrafficCard(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Column(modifier = Modifier.weight(1f).padding(end = 10.dp), horizontalAlignment = Alignment.End) {
-                Text(text = stringResource(R.string.traffic_download), color = Color(0x80FFFFFF), fontSize = 10.sp)
+                Text(text = stringResource(R.string.traffic_download), color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 10.sp)
                 Text(text = downloadTraffic, color = White, fontSize = 14.sp)
             }
             Box(modifier = Modifier.width(1.dp).height(30.dp).background(dividerColor))
@@ -124,5 +123,6 @@ fun TrafficCard(
                 Text(text = uploadTraffic, color = White, fontSize = 14.sp)
             }
         }
+    }
     }
 }
