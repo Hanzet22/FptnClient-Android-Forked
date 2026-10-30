@@ -6,6 +6,7 @@ import android.os.IBinder
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,6 +25,7 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
@@ -66,10 +68,6 @@ import org.fptn.vpn.services.tile.FptnTileService
 import org.fptn.vpn.ui.common.BottomNavBar
 import org.fptn.vpn.ui.common.LegacySpinner
 import org.fptn.vpn.ui.common.ShareDialog
-import org.fptn.vpn.ui.common.legacyDrawableBackground
-import org.fptn.vpn.ui.theme.Gray
-import org.fptn.vpn.ui.theme.Primary
-import org.fptn.vpn.ui.theme.White
 import org.fptn.vpn.vpnclient.exception.PVNClientException
 
 private const val TAG = "BypassMethodsScreen"
@@ -220,7 +218,7 @@ fun BypassMethodsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .legacyDrawableBackground(R.drawable.application_background)
+            .background(MaterialTheme.colorScheme.background)
             // Excludes the bottom side deliberately: BottomNavBar consumes the navigation-bar
             // inset itself so its background reaches the real screen edge instead of floating
             // above it with the screen background showing through underneath (see
@@ -244,7 +242,7 @@ fun BypassMethodsScreen(
             )
             Text(
                 text = stringResource(R.string.bypass_methods_title),
-                color = White,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(top = 10.dp),
@@ -337,7 +335,7 @@ fun BypassMethodsScreen(
                     }
                     Text(
                         text = stringResource(R.string.sni_text_description),
-                        color = Gray,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontSize = 12.sp,
                         modifier = Modifier.padding(start = 10.dp, top = 4.dp, end = 10.dp, bottom = 5.dp),
                     )
