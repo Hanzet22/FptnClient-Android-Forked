@@ -11,7 +11,10 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -24,10 +27,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import org.fptn.vpn.R
-import org.fptn.vpn.ui.common.legacyDrawableBackground
 import org.fptn.vpn.ui.theme.White
 
 /**
@@ -45,11 +48,15 @@ fun TrafficCard(
     modifier: Modifier = Modifier,
 ) {
     val dividerColor = Color(0x26FFFFFF)
-    Column(
-        modifier = modifier
-            .legacyDrawableBackground(R.drawable.round_settings_back_white10_20)
-            .heightIn(min = 140.dp),
+    Card(
+        modifier = modifier,
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
+        Column(modifier = Modifier.heightIn(min = 140.dp)) {
         Row(
             modifier = Modifier.fillMaxWidth().padding(8.dp),
             verticalAlignment = Alignment.CenterVertically,
