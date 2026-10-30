@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,6 +24,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -44,9 +47,6 @@ import org.fptn.vpn.R
 import org.fptn.vpn.ui.common.BottomNavBar
 import org.fptn.vpn.ui.common.LegacyPillButton
 import org.fptn.vpn.ui.common.ShareDialog
-import org.fptn.vpn.ui.common.legacyDrawableBackground
-import org.fptn.vpn.ui.theme.Primary
-import org.fptn.vpn.ui.theme.White
 import org.fptn.vpn.utils.backup.SettingsBackupManager
 import java.io.BufferedReader
 import java.io.File
@@ -94,7 +94,7 @@ fun BackupSettingsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .legacyDrawableBackground(R.drawable.application_background)
+            .background(MaterialTheme.colorScheme.background)
             // Excludes the bottom side deliberately: BottomNavBar consumes the navigation-bar
             // inset itself so its background reaches the real screen edge instead of floating
             // above it with the screen background showing through underneath (see
@@ -118,7 +118,7 @@ fun BackupSettingsScreen(
             )
             Text(
                 text = stringResource(R.string.backups_title),
-                color = White,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
@@ -131,7 +131,7 @@ fun BackupSettingsScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 8.dp)
-                    .legacyDrawableBackground(R.drawable.round_settings_back_white10_20)
+                    .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(22.dp))
                     .padding(16.dp),
             ) {
                 Text(
@@ -143,7 +143,7 @@ fun BackupSettingsScreen(
                 )
                 Text(
                     text = stringResource(R.string.backup_save_description),
-                    color = White.copy(alpha = 0.7f),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontSize = 12.sp,
                     modifier = Modifier.padding(bottom = 6.dp),
                 )
@@ -154,7 +154,7 @@ fun BackupSettingsScreen(
                     LegacyPillButton(
                         text = stringResource(R.string.backup_save_button),
                         backgroundDrawable = R.drawable.round_back_secondary_100,
-                        textColor = Primary,
+                        textColor = MaterialTheme.colorScheme.primary,
                         bold = true,
                         contentPadding = 12.dp,
                         onClick = { onSaveToFile(createFileLauncher) },
