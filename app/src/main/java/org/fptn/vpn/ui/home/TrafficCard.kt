@@ -21,13 +21,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import org.fptn.vpn.R
@@ -79,7 +78,7 @@ fun TrafficCard(
             Row(modifier = Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     text = uploadSpeed,
-                    color = White,
+                    color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.weight(1f).padding(start = 8.dp),
                 )
                 Image(
@@ -115,12 +114,12 @@ fun TrafficCard(
         ) {
             Column(modifier = Modifier.weight(1f).padding(end = 10.dp), horizontalAlignment = Alignment.End) {
                 Text(text = stringResource(R.string.traffic_download), color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 10.sp)
-                Text(text = downloadTraffic, color = White, fontSize = 14.sp)
+                Text(text = downloadTraffic, color = MaterialTheme.colorScheme.onSurface, fontSize = 14.sp)
             }
             Box(modifier = Modifier.width(1.dp).height(30.dp).background(dividerColor))
             Column(modifier = Modifier.weight(1f).padding(start = 10.dp)) {
-                Text(text = stringResource(R.string.traffic_upload), color = Color(0x80FFFFFF), fontSize = 10.sp)
-                Text(text = uploadTraffic, color = White, fontSize = 14.sp)
+                Text(text = stringResource(R.string.traffic_upload), color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 10.sp)
+                Text(text = uploadTraffic, color = MaterialTheme.colorScheme.onSurface, fontSize = 14.sp)
             }
         }
     }
