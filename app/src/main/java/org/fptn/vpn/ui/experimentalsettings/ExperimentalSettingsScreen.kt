@@ -9,6 +9,7 @@ import android.os.Build
 import android.provider.Settings
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -25,6 +26,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -57,7 +59,6 @@ import org.fptn.vpn.ui.common.MultilineTextInputDialog
 import org.fptn.vpn.ui.common.ShareDialog
 import org.fptn.vpn.ui.common.findActivity
 import org.fptn.vpn.ui.common.legacyDrawableBackground
-import org.fptn.vpn.ui.theme.White
 import org.fptn.vpn.utils.SharedPrefUtils
 
 private const val TAG = "ExperimentalSettingsScreen"
@@ -193,7 +194,7 @@ fun ExperimentalSettingsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .legacyDrawableBackground(R.drawable.application_background)
+            .background(MaterialTheme.colorScheme.background)
             // Excludes the bottom side deliberately: BottomNavBar consumes the navigation-bar
             // inset itself so its background reaches the real screen edge instead of floating
             // above it with the screen background showing through underneath (see
@@ -217,7 +218,7 @@ fun ExperimentalSettingsScreen(
             )
             Text(
                 text = stringResource(R.string.experimental_features_label),
-                color = White,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(top = 10.dp, bottom = 10.dp),
