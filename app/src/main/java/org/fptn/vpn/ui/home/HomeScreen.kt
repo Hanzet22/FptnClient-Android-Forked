@@ -39,7 +39,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.Surface
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
@@ -55,6 +57,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
@@ -84,8 +87,6 @@ import org.fptn.vpn.ui.common.ServerDropdown
 import org.fptn.vpn.ui.common.ShareDialog
 import org.fptn.vpn.ui.common.findActivity
 import org.fptn.vpn.ui.common.legacyDrawableBackground
-import org.fptn.vpn.ui.theme.White
-import org.fptn.vpn.ui.theme.Yellow
 import org.fptn.vpn.utils.PermissionsUtils
 import org.fptn.vpn.utils.SharedPrefUtils
 import org.fptn.vpn.vpnclient.exception.ErrorCode
@@ -438,7 +439,7 @@ fun HomeScreen(
                     )
                     Text(
                         text = stringResource(R.string.permission_warning_text),
-                        color = White,
+                        color = MaterialTheme.colorScheme.onBackground,
                         fontSize = 12.sp,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.padding(start = 6.dp),
@@ -484,8 +485,8 @@ fun HomeScreen(
                             .then(if (showConnectedUi) Modifier else Modifier.semantics { hideFromAccessibility() })
                             .onSizeChanged { size -> timerHeight = with(density) { size.height.toDp() } },
                     ) {
-                        Text(text = stringResource(R.string.connection_time), color = White)
-                        Text(text = timerText, color = White, modifier = Modifier.padding(bottom = 4.dp))
+                        Text(text = stringResource(R.string.connection_time), color = MaterialTheme.colorScheme.onBackground)
+                        Text(text = timerText, color = MaterialTheme.colorScheme.onBackground, modifier = Modifier.padding(bottom = 4.dp))
                     }
 
                     Image(
@@ -499,11 +500,18 @@ fun HomeScreen(
                             ) { onToggleConnectClick() },
                     )
 
-                    Text(
-                        text = statusText,
-                        color = Yellow,
-                        modifier = Modifier.padding(top = 4.dp, bottom = 4.dp),
-                    )
+                    Surface(
+                        color = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                        shape = RoundedCornerShape(50),
+                        modifier = Modifier.padding(top = 6.dp, bottom = 6.dp),
+                    ) {
+                        Text(
+                            text = statusText,
+                            style = MaterialTheme.typography.labelLarge,
+                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 7.dp),
+                        )
+                    }
 
                     if (showConnectedUi) {
                         Row(
@@ -512,10 +520,10 @@ fun HomeScreen(
                         ) {
                             Text(
                                 text = stringResource(R.string.server_label),
-                                color = White,
+                                color = MaterialTheme.colorScheme.onBackground,
                                 modifier = Modifier.padding(end = 5.dp)
                             )
-                            Text(text = connectedServerInfo.orEmpty(), color = White, maxLines = 2)
+                            Text(text = connectedServerInfo.orEmpty(), color = MaterialTheme.colorScheme.onBackground, maxLines = 2)
                         }
                     } else {
                         ServerDropdown(
