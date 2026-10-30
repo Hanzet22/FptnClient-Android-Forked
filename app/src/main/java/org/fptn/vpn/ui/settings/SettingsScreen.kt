@@ -21,8 +21,12 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -52,9 +56,6 @@ import org.fptn.vpn.ui.common.BottomNavBar
 import org.fptn.vpn.ui.common.HtmlLinkText
 import org.fptn.vpn.ui.common.LegacySpinner
 import org.fptn.vpn.ui.common.ShareDialog
-import org.fptn.vpn.ui.common.legacyDrawableBackground
-import org.fptn.vpn.ui.theme.Gray
-import org.fptn.vpn.ui.theme.White
 import org.fptn.vpn.utils.PermissionsUtils
 import org.fptn.vpn.utils.SharedPrefUtils
 import org.fptn.vpn.utils.XLogInitializer
@@ -118,7 +119,7 @@ fun SettingsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .legacyDrawableBackground(R.drawable.application_background)
+            .background(MaterialTheme.colorScheme.background)
             // Excludes the bottom side deliberately: BottomNavBar consumes the navigation-bar
             // inset itself so its background reaches the real screen edge instead of floating
             // above it with the screen background showing through underneath (see
@@ -142,14 +143,14 @@ fun SettingsScreen(
             )
             Text(
                 text = appVersion,
-                color = White,
+                color = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier.padding(top = 10.dp),
             )
 
             SettingsCard {
                 HtmlLinkText(
                     html = stringResource(R.string.info_message_html),
-                    color = White,
+                    color = MaterialTheme.colorScheme.onSurface,
                     bold = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -162,7 +163,7 @@ fun SettingsScreen(
             ) {
                 HtmlLinkText(
                     html = stringResource(R.string.settings_token_info_html),
-                    color = Gray,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontSize = 12.sp,
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -198,7 +199,7 @@ fun SettingsScreen(
                     )
                     Text(
                         text = stringResource(R.string.required_permissions),
-                        color = White,
+                        color = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.padding(start = 12.dp),
                     )
                 }
@@ -231,7 +232,7 @@ fun SettingsScreen(
                     ) {
                         Text(
                             text = stringResource(R.string.log_level_title),
-                            color = White,
+                            color = MaterialTheme.colorScheme.onSurface,
                             fontSize = 14.sp,
                             modifier = Modifier.weight(1f),
                         )
@@ -251,7 +252,7 @@ fun SettingsScreen(
                     }
                     Text(
                         text = stringResource(R.string.clear_logs_button),
-                        color = Gray,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontSize = 13.sp,
                         textDecoration = TextDecoration.Underline,
                         modifier = Modifier
@@ -282,14 +283,14 @@ fun SettingsScreen(
                     )
                     Text(
                         text = stringResource(R.string.sponsors_text) + if (sponsorsExpanded) "  ▲" else "  ▼",
-                        color = White,
+                        color = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.padding(start = 12.dp),
                     )
                 }
                 if (sponsorsExpanded) {
                     HtmlLinkText(
                         html = stringResource(R.string.sponsors_usernames),
-                        color = White,
+                        color = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(start = 16.dp, top = 4.dp),
@@ -412,14 +413,17 @@ private fun requestBackgroundDataTransferPermission(context: android.content.Con
 
 @Composable
 private fun SettingsCard(content: @Composable () -> Unit) {
-    Column(
+    Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-            .legacyDrawableBackground(R.drawable.round_settings_back_white10_20)
-            .padding(16.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        shape = RoundedCornerShape(22.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
-        content()
+        Column(modifier = Modifier.padding(16.dp)) {
+            content()
+        }
     }
 }
 
@@ -431,49 +435,53 @@ private fun SettingsNavRow(
     onClick: () -> Unit,
     content: @Composable (() -> Unit)? = null,
 ) {
-    Column(
+    Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-            .legacyDrawableBackground(R.drawable.round_settings_back_white10_20),
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        shape = RoundedCornerShape(22.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable(onClick = onClick)
-                .padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Image(
-                painter = painterResource(icon),
-                contentDescription = null,
-                modifier = Modifier.size(32.dp),
-            )
-            Text(
-                text = title,
-                color = White,
-                fontWeight = FontWeight.Bold,
+        Column {
+            Row(
                 modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 12.dp),
-            )
-            Image(
-                painter = painterResource(R.drawable.ic_outline_arrow_forward_ios_16),
-                contentDescription = null,
-                modifier = Modifier.size(16.dp),
-            )
-        }
-        if (description != null) {
-            Text(
-                text = description,
-                color = Gray,
-                fontSize = 12.sp,
-                modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 12.dp),
-            )
-        }
-        content?.let {
-            Box(modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 12.dp)) {
-                it()
+                    .fillMaxWidth()
+                    .clickable(onClick = onClick)
+                    .padding(12.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Image(
+                    painter = painterResource(icon),
+                    contentDescription = null,
+                    modifier = Modifier.size(32.dp),
+                )
+                Text(
+                    text = title,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 12.dp),
+                )
+                Image(
+                    painter = painterResource(R.drawable.ic_outline_arrow_forward_ios_16),
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp),
+                )
+            }
+            if (description != null) {
+                Text(
+                    text = description,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontSize = 12.sp,
+                    modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 12.dp),
+                )
+            }
+            content?.let {
+                Box(modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 12.dp)) {
+                    it()
+                }
             }
         }
     }
@@ -494,7 +502,7 @@ private fun PermissionRow(icon: Int, label: String, granted: Boolean, onRequest:
         )
         Text(
             text = label,
-            color = White,
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
                 .weight(1f)
                 .padding(start = 8.dp),
