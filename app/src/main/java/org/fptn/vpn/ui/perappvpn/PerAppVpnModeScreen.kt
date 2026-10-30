@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,6 +28,7 @@ import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Icon
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Switch
@@ -58,10 +60,6 @@ import org.fptn.vpn.ui.common.HtmlLinkText
 import org.fptn.vpn.ui.common.LinkifiedText
 import org.fptn.vpn.ui.common.MultilineTextInputDialog
 import org.fptn.vpn.ui.common.ShareDialog
-import org.fptn.vpn.ui.common.legacyDrawableBackground
-import org.fptn.vpn.ui.theme.Gray
-import org.fptn.vpn.ui.theme.TealAccent
-import org.fptn.vpn.ui.theme.White
 import org.fptn.vpn.utils.SharedPrefUtils
 
 private const val TAG = "PerAppVpnModeScreen"
@@ -115,7 +113,7 @@ fun PerAppVpnModeScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .legacyDrawableBackground(R.drawable.application_background)
+            .background(MaterialTheme.colorScheme.background)
             // Excludes the bottom side deliberately: BottomNavBar consumes the navigation-bar
             // inset itself so its background reaches the real screen edge instead of floating
             // above it with the screen background showing through underneath (see
@@ -139,7 +137,7 @@ fun PerAppVpnModeScreen(
             )
             Text(
                 text = stringResource(R.string.per_app_vpn_settings_title),
-                color = White,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(horizontal = 20.dp, vertical = 10.dp),
@@ -149,7 +147,7 @@ fun PerAppVpnModeScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp, vertical = 12.dp),
-                color = Gray,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontSize = 12.sp,
             )
 
@@ -380,7 +378,7 @@ private fun AppRow(app: AppInfo, mode: PerAppVpnMode, onToggle: () -> Unit) {
         }
         Text(
             text = app.label,
-            color = if (forcedExcluded) TealAccent else White,
+            color = if (forcedExcluded) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.onSurface,
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
