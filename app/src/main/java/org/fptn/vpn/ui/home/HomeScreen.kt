@@ -1,14 +1,14 @@
 package org.fptn.vpn.ui.home
 
-import android.Manifest
 import android.app.Activity
 import android.app.StatusBarManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.ServiceConnection
 import android.content.res.Configuration
+import android.content.ServiceConnection
 import android.graphics.drawable.Icon
+import android.Manifest
 import android.net.Uri
 import android.net.VpnService
 import android.os.Build
@@ -17,48 +17,48 @@ import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.Surface
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
@@ -71,26 +71,26 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.viewmodel.compose.viewModel
-import org.fptn.vpn.R
 import org.fptn.vpn.database.entity.ServerEntity
 import org.fptn.vpn.enums.ConnectionState
+import org.fptn.vpn.R
 import org.fptn.vpn.services.snichecker.SniCheckerService
 import org.fptn.vpn.services.snichecker.SniCheckerServiceState
 import org.fptn.vpn.services.tile.FptnTileService
 import org.fptn.vpn.services.vpn.FptnService
 import org.fptn.vpn.services.vpn.FptnServiceState
 import org.fptn.vpn.ui.common.BottomNavBar
-import org.fptn.vpn.ui.common.ServerDropdown
-import org.fptn.vpn.ui.common.ShareDialog
 import org.fptn.vpn.ui.common.findActivity
 import org.fptn.vpn.ui.common.legacyDrawableBackground
+import org.fptn.vpn.ui.common.ServerDropdown
+import org.fptn.vpn.ui.common.ShareDialog
 import org.fptn.vpn.utils.PermissionsUtils
 import org.fptn.vpn.utils.SharedPrefUtils
 import org.fptn.vpn.vpnclient.exception.ErrorCode
-import androidx.core.net.toUri
 
 private const val TOKEN_MAX_AGE_MS = 14L * 24 * 60 * 60 * 1000
 private const val TOKEN_STALE_AGE_MS = 3L * 24 * 60 * 60 * 1000
@@ -485,8 +485,15 @@ fun HomeScreen(
                             .then(if (showConnectedUi) Modifier else Modifier.semantics { hideFromAccessibility() })
                             .onSizeChanged { size -> timerHeight = with(density) { size.height.toDp() } },
                     ) {
-                        Text(text = stringResource(R.string.connection_time), color = MaterialTheme.colorScheme.onBackground)
-                        Text(text = timerText, color = MaterialTheme.colorScheme.onBackground, modifier = Modifier.padding(bottom = 4.dp))
+                        Text(
+                            text = stringResource(R.string.connection_time),
+                            color = MaterialTheme.colorScheme.onBackground,
+                        )
+                        Text(
+                            text = timerText,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier.padding(bottom = 4.dp),
+                        )
                     }
 
                     Image(
@@ -523,7 +530,11 @@ fun HomeScreen(
                                 color = MaterialTheme.colorScheme.onBackground,
                                 modifier = Modifier.padding(end = 5.dp)
                             )
-                            Text(text = connectedServerInfo.orEmpty(), color = MaterialTheme.colorScheme.onBackground, maxLines = 2)
+                            Text(
+                                text = connectedServerInfo.orEmpty(),
+                                color = MaterialTheme.colorScheme.onBackground,
+                                maxLines = 2,
+                            )
                         }
                     } else {
                         ServerDropdown(
